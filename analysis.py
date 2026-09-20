@@ -1,19 +1,32 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Read the dataset
 df = pd.read_csv("students.csv")
 
-# Display the complete dataset
+# Display the dataset
 print("Student Performance Data:")
 print(df)
 
-# Display basic information
-print("\nNumber of students:", len(df))
-
 # Calculate average marks
-print("\nAverage Marks:")
-print(df[["Maths", "Physics", "Programming", "Data_Science"]].mean())
+subjects = ["Maths", "Physics", "Programming", "Data_Science"]
+averages = df[subjects].mean()
 
-# Find the highest programming marks
-print("\nHighest Programming Marks:")
-print(df["Programming"].max())
+print("\nAverage Marks:")
+print(averages)
+
+# Find highest programming marks
+print("\nHighest Programming Marks:", df["Programming"].max())
+
+# Create a bar chart
+plt.figure(figsize=(8, 5))
+averages.plot(kind="bar")
+
+plt.title("Average Marks by Subject")
+plt.xlabel("Subjects")
+plt.ylabel("Average Marks")
+plt.xticks(rotation=0)
+plt.tight_layout()
+
+plt.savefig("average_marks.png")
+plt.show()
